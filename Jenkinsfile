@@ -39,3 +39,23 @@ pipeline{
         }
     }
 }
+
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Code Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/shadysa18-dev/Python.git'
+            }
+        }
+
+        stage('Docker Build+Tag') {
+            steps {
+                sh 'docker build -t flask-hello-world:latest .'
+            }
+        }
+    }
+}
